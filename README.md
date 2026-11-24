@@ -38,6 +38,28 @@ wasm_json_validator --schema schema.json --input records.xlsx --format xlsx
 wasm_json_validator --schema schema.json --input data.json --output json
 ```
 
+### Usage (Spin HTTP Gateway)
+
+Run the serverless HTTP payload validation gateway with Fermyon Spin:
+
+```bash
+# Build the Spin component
+spin build
+
+# Start the local Spin server
+spin up
+
+# Validate a JSON payload via HTTP POST
+curl -i -X POST "http://localhost:3000/validate?schema=examples/user_schema.json" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Alice", "age": 30}'
+
+# Test invalid payload (returns HTTP 400 with diagnostics)
+curl -i -X POST "http://localhost:3000/validate?schema=examples/user_schema.json" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Bob", "age": -5}'
+```
+
 ## License
 
 Licensed under the Apache License, Version 2.0.
