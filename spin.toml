@@ -1,0 +1,23 @@
+spin_manifest_version = 2
+
+[application]
+name = "wasm-json-validator-gateway"
+version = "0.1.0"
+authors = ["Zheng-Bote <zheng.bote@googlemail.com>"]
+description = "Fermyon Spin HTTP Payload Validation Gateway for WASI Preview 2"
+
+[[trigger.http]]
+route = "/validate/..."
+component = "validator-gateway"
+
+[[trigger.http]]
+route = "/validate"
+component = "validator-gateway"
+
+[component.validator-gateway]
+source = "target/wasm32-wasip2/release/wasm_json_validator_spin.wasm"
+files = [{ source = "examples/", destination = "examples/" }]
+
+[component.validator-gateway.build]
+command = "cargo build --bin wasm_json_validator_spin --target wasm32-wasip2 --release"
+watch = ["src/**/*.rs", "Cargo.toml"]

@@ -10,14 +10,42 @@ Schneller, ressourcenschonender JSON-Schema-Payload-Validator für **WASM/WASI**
 - **Spec-Driven Architecture:** Verwaltet über `sdd` mit Schichtenarchitektur (`src/formats`, `src/schema`, `src/report`, `src/cli`, `spin`).
 - **Optionale Spin-HTTP-Integration:** Prüfung von Inbound-HTTP-Requests direkt am Gateway.
 
-## Schnelleinstieg
+### CLI-Nutzung
 
 ```bash
-# Nativ bauen
-cargo build --release
+# JSON gegen Schema validieren
+wasm_json_validator --schema schema.json --input data.json
 
-# Für WASI Preview 2 bauen
-cargo build --release --target wasm32-wasip2
+# CSV-Datei validieren
+wasm_json_validator --schema schema.json --input data.csv --format csv
+
+# Excel XLSX-Datei validieren
+wasm_json_validator --schema schema.json --input records.xlsx --format xlsx
+
+# JSON-Fehlerdiagnose ausgeben
+wasm_json_validator --schema schema.json --input data.json --output json
+```
+
+### Spin HTTP-Gateway Nutzung
+
+Starten des serverlosen HTTP-Payload-Gateways mit Fermyon Spin:
+
+```bash
+# Spin-Komponente bauen
+spin build
+
+# Lokalen Spin-Server starten
+spin up
+
+# JSON-Payload per HTTP POST validieren (liefert 200 OK)
+curl -i -X POST "http://localhost:3000/validate?schema=examples/user_schema.json" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Alice", "age": 30}'
+
+# Ungültigen Payload prüfen (liefert 400 Bad Request mit Diagnose)
+curl -i -X POST "http://localhost:3000/validate?schema=examples/user_schema.json" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Bob", "age": -5}'
 ```
 
 ## Lizenz
