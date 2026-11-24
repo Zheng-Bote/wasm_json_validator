@@ -1,0 +1,43 @@
+version: 1
+profile: standard
+language: de
+
+base_ref: ""
+
+artifacts:
+  constitution: "constitution.md"
+  adr: "docs/adr"
+  prd: "docs/prd"
+  design: "docs/design"
+  plans: "docs/plans"
+  archive: "docs/archive"
+  docs:
+    - "docs/notes"
+  architecture: "docs/arc42.md"
+
+tests:
+  include:
+    - "tests/**/*.rs"
+    - "src/**/*_test.rs"
+
+thresholds:
+  layers:
+    - "src/schema/**"
+    - "src/formats/**"
+    - "src/report/**"
+    - "src/cli/**"
+    - "src/provider/**"
+    - "spin/**"
+  feature_artifacts_required_when:
+    min_layers_touched: 2
+    touched_paths:
+      - "src/**"
+      - "Cargo.toml"
+      - "wit/**"
+      - "spin.toml"
+
+exclude:
+  - target/**
+  - vendor/**
+  - node_modules/**
+  - .git/**
