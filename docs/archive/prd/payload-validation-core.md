@@ -1,10 +1,11 @@
 ---
 feature: payload-validation-core
-status: draft
+status: archived
 archive-after:
 touches:
   - src/**
   - Cargo.toml
+release: 0.1.0
 ---
 
 # PRD — Multi-Format JSON-Schema Payload Validator for WASI Preview 2 (JSON, CSV, XLSX) (`payload-validation-core`)

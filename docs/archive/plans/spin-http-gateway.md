@@ -1,7 +1,8 @@
 ---
 feature: spin-http-gateway
-status: draft
+status: archived
 archive-after:
+release: 0.1.0
 ---
 
 # Plan — Spin Inbound HTTP Interceptor & Payload Validation Gateway (`spin-http-gateway`)

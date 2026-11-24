@@ -1,12 +1,13 @@
 ---
 feature: spin-http-gateway
-status: draft
+status: archived
 archive-after:
 touches:
   - src/**
   - Cargo.toml
   - spin/**
   - spin.toml
+release: 0.1.0
 ---
 
 # PRD — Spin Inbound HTTP Interceptor & Payload Validation Gateway (`spin-http-gateway`)
