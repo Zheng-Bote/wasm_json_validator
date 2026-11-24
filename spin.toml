@@ -19,5 +19,5 @@ source = "target/wasm32-wasip2/release/wasm_json_validator_spin.wasm"
 files = [{ source = "examples/", destination = "examples/" }]
 
 [component.validator-gateway.build]
-command = "cargo build --bin wasm_json_validator_spin --target wasm32-wasip2 --release"
-watch = ["src/**/*.rs", "Cargo.toml"]
+command = "cargo build --package wasm_json_validator_spin --target wasm32-wasip2 --release"
+watch = ["spin/**/*.rs", "src/**/*.rs", "Cargo.toml"]
